@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { Context } from '../index'
-import { useCollectionData } from 'react-firebase-hooks/firestore'
+import { useCollectionDataOnce } from 'react-firebase-hooks/firestore'
 import Loading from './Loading'
 import Column from './Column'
 import styled from 'styled-components'
@@ -9,11 +9,12 @@ import { DragDropContext } from 'react-beautiful-dnd'
 const Container = styled.div`
     display: flex;
     flex-direction: row;
+    align-items: flex-start;
 `
 
 const Dashboard = () => {
     const firestore = useContext(Context)
-    const [tasksDocs, loading] = useCollectionData(
+    const [tasksDocs, loading] = useCollectionDataOnce(
         firestore.collection('tasks'),
         {
             idField: 'uId'
